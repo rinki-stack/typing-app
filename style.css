@@ -1,0 +1,372 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg1: #fff5f8;
+  --bg2: #ffe4ee;
+  --card: #ffffffee;
+  --border: #ffd3e4;
+  --text: #6b3a52;
+  --muted: #c495ab;
+  --accent: #f472b6;
+  --accent2: #ec4899;
+  --ok: #ec4899;
+  --miss: #f87171;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background: radial-gradient(circle at 20% 10%, var(--bg2) 0%, var(--bg1) 60%), var(--bg1);
+  background-attachment: fixed;
+  color: var(--text);
+}
+
+.container {
+  width: min(720px, 92vw);
+  margin: 5vh auto;
+}
+
+.screen {
+  display: none;
+  text-align: center;
+  animation: fadein 0.35s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 最初に画面いっぱいに出るタイトル ---- */
+
+.hero {
+  min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5em;
+}
+
+.hero .title {
+  font-size: 3.2rem;
+  margin-bottom: 0;
+}
+
+.scroll-hint {
+  color: var(--accent2);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+}
+
+.title {
+  font-size: 2.6rem;
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.4em;
+}
+
+.title.small {
+  font-size: 2rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 2em;
+}
+
+.rules {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2em 1.5em;
+  line-height: 2;
+  margin-bottom: 2.5em;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 24px #f472b622;
+}
+
+.rules strong {
+  color: var(--accent2);
+}
+
+.prompt {
+  color: var(--accent2);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+}
+
+/* ---- 女の子一覧 ---- */
+
+.list-title {
+  font-size: 1.15rem;
+  color: #fff;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  letter-spacing: 0.12em;
+  text-align: left;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px #f472b633;
+  margin-bottom: 0.6em;
+}
+
+.list-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 1.2em;
+}
+
+.girl-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8em;
+}
+
+.girl {
+  font-family: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px #f472b622;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.girl:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 22px #f472b644;
+}
+
+.girl-photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+}
+
+.girl-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.girl-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ec4899cc;
+  color: #fff;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  padding: 0.25em 0;
+  animation: status-blink 2.6s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.girl-name {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.55em 0.3em;
+}
+
+.girl-name::before {
+  content: "❤︎ ";
+  color: var(--accent);
+}
+
+.girl-age {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.85em;
+}
+
+@media (max-width: 560px) {
+  .girl-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.btn-home {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--accent2);
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.7em 2.2em;
+  margin-top: 1.4em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px #f472b622;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.btn-home:hover {
+  transform: translateY(-2px);
+  background: #fff0f6;
+}
+
+.blink {
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ---- ゲーム画面 ---- */
+
+#screen-game,
+#screen-result {
+  margin-top: 14vh;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-bottom: 0.8em;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  min-width: 5em;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+}
+
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+  margin-bottom: 2em;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 0.25s ease;
+}
+
+.word-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2.5em 1.5em;
+  box-shadow: 0 10px 40px #f472b62e;
+}
+
+.word-card.shake {
+  animation: shake 0.18s ease;
+  border-color: var(--miss);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.word-display {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.35em;
+}
+
+.word-kana {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-bottom: 1.2em;
+}
+
+.word-romaji {
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 1.6rem;
+  letter-spacing: 0.12em;
+}
+
+.romaji-done {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.romaji-rest {
+  color: #d8b7c8;
+}
+
+.hint {
+  margin-top: 1.6em;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ---- リザルト画面 ---- */
+
+.rank {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0.1em 0 0.3em;
+  background: linear-gradient(180deg, #f9a8d4, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  margin-bottom: 2.5em;
+}
+
+.result-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 6px 24px #f472b622;
+}

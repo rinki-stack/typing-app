@@ -1,0 +1,4 @@
+# 元音声(公開には埋め込みデータ voices_data.js を使うので不要)
+audio/*.wav
+audio/*.m4a
+.DS_Store

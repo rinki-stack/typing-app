@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タイピング専門店❤︎</title>
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+  <main class="container">
+
+    <!-- スタート画面 -->
+    <section id="screen-start" class="screen active">
+      <div class="hero">
+        <h1 class="title">タイピング専門店❤︎</h1>
+      </div>
+      <h2 class="list-title">❤︎ 女の子一覧 ❤︎</h2>
+      <p class="list-note">好きな女の子を選ぶとスタートします</p>
+      <div class="girl-list" id="girl-list"><!-- main.js が生成 --></div>
+    </section>
+
+    <!-- ゲーム画面 -->
+    <section id="screen-game" class="screen">
+      <header class="hud">
+        <div class="hud-item"><span class="hud-label">担当</span><span id="hud-girl">りん</span></div>
+        <div class="hud-item"><span class="hud-label">単語</span><span id="hud-progress">1 / 10</span></div>
+        <div class="hud-item"><span class="hud-label">タイム</span><span id="hud-time">0.0</span></div>
+        <div class="hud-item"><span class="hud-label">ミス</span><span id="hud-miss">0</span></div>
+      </header>
+      <div class="progress-bar"><div id="progress-fill"></div></div>
+      <div id="word-card" class="word-card">
+        <div id="word-display" class="word-display">寿司</div>
+        <div id="word-kana" class="word-kana">すし</div>
+        <div class="word-romaji">
+          <span id="romaji-done" class="romaji-done"></span><span id="romaji-rest" class="romaji-rest">sushi</span>
+        </div>
+      </div>
+      <p class="hint">Esc でチェンジ</p>
+    </section>
+
+    <!-- リザルト画面 -->
+    <section id="screen-result" class="screen">
+      <h1 class="title small">結果発表</h1>
+      <div id="result-rank" class="rank">A</div>
+      <div class="result-grid">
+        <div class="result-item"><span class="hud-label">タイム</span><span id="result-time">--</span></div>
+        <div class="result-item"><span class="hud-label">速度 (打/分)</span><span id="result-kpm">--</span></div>
+        <div class="result-item"><span class="hud-label">正確率</span><span id="result-acc">--</span></div>
+        <div class="result-item"><span class="hud-label">ミス</span><span id="result-miss">--</span></div>
+      </div>
+      <p class="prompt blink">スペースキー で 延長</p>
+      <button id="btn-home" class="btn-home">退店する</button>
+    </section>
+
+  </main>
+  <script src="words.js?v=2"></script>
+  <script src="audio/voices_data.js?v=2"></script>
+  <script src="main.js?v=4"></script>
+</body>
+</html>
