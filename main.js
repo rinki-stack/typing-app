@@ -6,9 +6,9 @@
  * それ以外の表記で打っても正解として受け付ける。
  * ================================================================ */
 const KANA_TABLE = {
-  "あ": ["a"], "い": ["i", "yi"], "う": ["u", "wu", "whu"], "え": ["e"], "お": ["o"],
-  "か": ["ka", "ca"], "き": ["ki"], "く": ["ku", "cu", "qu"], "け": ["ke"], "こ": ["ko", "co"],
-  "さ": ["sa"], "し": ["shi", "si", "ci"], "す": ["su"], "せ": ["se", "ce"], "そ": ["so"],
+  "あ": ["a"], "い": ["i"], "う": ["u"], "え": ["e"], "お": ["o"],
+  "か": ["ka"], "き": ["ki"], "く": ["ku"], "け": ["ke"], "こ": ["ko"],
+  "さ": ["sa"], "し": ["shi", "si"], "す": ["su"], "せ": ["se"], "そ": ["so"],
   "た": ["ta"], "ち": ["chi", "ti"], "つ": ["tsu", "tu"], "て": ["te"], "と": ["to"],
   "な": ["na"], "に": ["ni"], "ぬ": ["nu"], "ね": ["ne"], "の": ["no"],
   "は": ["ha"], "ひ": ["hi"], "ふ": ["fu", "hu"], "へ": ["he"], "ほ": ["ho"],
@@ -56,7 +56,7 @@ const GIRLS = {
   // sample あり: 録音ボイス(正タイプごとにセリフの切れ目単位で再生)
   "ちい":   { age: 21, photo: "img/chii.png", sample: "audio/chii.wav" },
   "れぇ":   { age: 22, photo: "img/ree.png", sample: "audio/ree.wav" },
-  "れい":   { age: 19, photo: "img/rei.png", sample: "audio/rei.wav" },
+  "れい":   { age: 22, photo: "img/rei.png", sample: "audio/rei.wav" },
   "かおり": { age: 26, photo: "img/kaori.png", sample: "audio/kaori.wav" },
   "みい":   { age: 24, photo: "img/mii.png", sample: "audio/mii.wav" },
   "りん":   { age: 19, photo: "img/nophoto.jpg", pitch: 1.0,  rate: 1.0,  tone: 620 },
@@ -535,6 +535,14 @@ function renderGirlList() {
     btn.innerHTML =
       `<span class="girl-photo"><img src="${girl.photo}" alt="${name}">${status}</span>` +
       `<span class="girl-name">${name} <span class="girl-age">(${girl.age})</span></span>`;
+    // 写真ファイルが無い/読めない場合は「写真準備中」に自動で切り替える
+    const img = btn.querySelector("img");
+    img.onerror = () => {
+      img.onerror = null;
+      img.src = "img/nophoto.jpg";
+      const st = btn.querySelector(".girl-status");
+      if (st) st.remove();
+    };
     btn.addEventListener("click", () => {
       btn.blur(); // スペースキーがボタン再クリックにならないように
       startGame(name);
