@@ -434,10 +434,11 @@ function pickWords() {
 
 function startGame(girlName) {
   if (girlName) state.girlName = girlName;
-  const girl = GIRLS[state.girlName];
+  const girl = GIRLS[girlName || state.girlName];
   if (girl && girl.sample) {
     loadSampleBuffer(girl); // 先読みしておく
-    girl._chunk = 0; // 音声を最初から
+    // 一覧から指名し直したときだけ最初から。延長(スペースキー)は続きから
+    if (girlName) girl._chunk = 0;
   }
   state.words = pickWords();
   state.wordIndex = 0;
