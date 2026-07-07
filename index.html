@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>タイピング専門店❤︎</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
   <main class="container">
@@ -17,6 +17,64 @@
       <h2 class="list-title">❤︎ 女の子一覧 ❤︎</h2>
       <p class="list-note">好きな女の子を選ぶとスタートします</p>
       <div class="girl-list" id="girl-list"><!-- main.js が生成 --></div>
+
+      <h2 class="list-title price-band">料金システム</h2>
+      <div class="price-table">
+        <table>
+          <tr>
+            <td class="row-label">ご褒美判定</td>
+            <td class="row-body">
+              <table class="inner">
+                <tr>
+                  <th>ピストン(打/分)</th>
+                  <th>正確率</th>
+                </tr>
+                <tr>
+                  <td colspan="2">ピストン(打/分) × 正確率 でご褒美セリフが決まります</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="row-label">ご褒美セリフ</td>
+            <td class="row-body">
+              <table class="inner">
+                <tr>
+                  <th>360〜</th>
+                  <th>280〜359</th>
+                  <th>200〜279</th>
+                  <th>120〜199</th>
+                  <th>〜119</th>
+                </tr>
+                <tr>
+                  <td>とくべつ❤︎</td>
+                  <td>あまあま</td>
+                  <td>ほめほめ</td>
+                  <td>おうえん</td>
+                  <td>なぐさめ</td>
+                </tr>
+              </table>
+              <p class="price-note">※セリフは女の子との対面後、フィニッシュのあとにお楽しみいただけます。</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="row-label">延長・チェンジ</td>
+            <td class="row-body">
+              <table class="inner">
+                <tr>
+                  <th>延長(スペースキー)</th>
+                  <th>チェンジ(Esc)</th>
+                </tr>
+                <tr>
+                  <td>無料・何回でも</td>
+                  <td>無料・いつでも</td>
+                </tr>
+              </table>
+              <p class="price-note">※当店はチェンジ・キャンセル無料の優良店です。入会金・指名料もいただきません。</p>
+            </td>
+          </tr>
+        </table>
+      </div>
     </section>
 
     <!-- ゲーム画面 -->
@@ -40,11 +98,13 @@
 
     <!-- リザルト画面 -->
     <section id="screen-result" class="screen">
-      <h1 class="title small">結果発表</h1>
-      <div id="result-rank" class="rank">A</div>
+      <div class="serif-bubble">
+        <div id="serif-name" class="serif-name">ちい</div>
+        <p id="result-serif" class="serif-text">おつかれさま!</p>
+      </div>
       <div class="result-grid">
-        <div class="result-item"><span class="hud-label">タイム</span><span id="result-time">--</span></div>
-        <div class="result-item"><span class="hud-label">速度 (打/分)</span><span id="result-kpm">--</span></div>
+        <div class="result-item"><span class="hud-label">フィニッシュ</span><span id="result-time">--</span></div>
+        <div class="result-item"><span class="hud-label">ピストン (打/分)</span><span id="result-kpm">--</span></div>
         <div class="result-item"><span class="hud-label">正確率</span><span id="result-acc">--</span></div>
         <div class="result-item"><span class="hud-label">ミス</span><span id="result-miss">--</span></div>
       </div>
@@ -55,6 +115,6 @@
   </main>
   <script src="words.js?v=2"></script>
   <script src="audio/voices_data.js?v=2"></script>
-  <script src="main.js?v=4"></script>
+  <script src="main.js?v=6"></script>
 </body>
 </html>

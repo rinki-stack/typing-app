@@ -340,22 +340,22 @@ body {
 
 /* ---- リザルト画面 ---- */
 
-.rank {
-  font-size: 6rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0.1em 0 0.3em;
-  background: linear-gradient(180deg, #f9a8d4, #ec4899);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.serif-bubble {
+  position: relative;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  border-radius: 18px;
+  padding: 1.3em 1.5em;
+  margin: 0 auto 1.6em;
+  max-width: 30em;
+  box-shadow: 0 6px 24px #f472b622;
 }
 
 .result-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
-  margin-bottom: 2.5em;
+  margin-bottom: 2em;
 }
 
 .result-item {
@@ -369,4 +369,86 @@ body {
   font-size: 1.5rem;
   font-variant-numeric: tabular-nums;
   box-shadow: 0 6px 24px #f472b622;
+}
+
+.serif-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent2);
+  margin-bottom: 0.3em;
+}
+
+.serif-name::before {
+  content: "❤︎ ";
+}
+
+.serif-text {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* ---- スコアシステム(料金表風) ---- */
+
+.price-band {
+  margin-top: 2.2em;
+  border-radius: 4px;
+}
+
+.price-table {
+  background: #fff;
+  border: 1px solid #bbb;
+  padding: 0.6em;
+  text-align: left;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
+.price-table > table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.price-table .row-label {
+  width: 8.5em;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 700;
+  color: #555;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 0.8em 0.4em;
+}
+
+.price-table .row-body {
+  border: 1px solid #ccc;
+  padding: 0.8em;
+}
+
+.price-table .inner {
+  border-collapse: collapse;
+}
+
+.price-table .inner th {
+  background: #ffffcc;
+  border: 1px solid #f8b7d4;
+  color: #555;
+  font-weight: 700;
+  padding: 0.35em 0.9em;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.price-table .inner td {
+  background: #fff;
+  border: 1px solid #f8b7d4;
+  color: #444;
+  text-align: center;
+  padding: 0.35em 0.9em;
+  white-space: nowrap;
+}
+
+.price-note {
+  color: #888;
+  font-size: 0.75rem;
+  margin-top: 0.6em;
 }

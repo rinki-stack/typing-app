@@ -79,6 +79,15 @@ const PRAISE_LINES = [
   "そのちょうし!", "さすがだね!", "もっといけるよ!",
 ];
 
+/* 結果発表のセリフ(スコアから内部的にランクを判定して出し分け) */
+const RANK_LINES = {
+  S: "え、はやすぎ…!すごすぎて惚れちゃうかも❤︎",
+  A: "じょうずだったよ〜!また指名してね?",
+  B: "いい感じだったよ!次はもっと上いけそう",
+  C: "おつかれさま!いっぱい練習して、また来てね",
+  D: "今日はゆっくりできたね?…また会いに来てくれる?",
+};
+
 /* ---- タイプ音(Web Audio) ---- */
 let audioCtx = null;
 
@@ -490,13 +499,15 @@ function finishGame() {
   const total = state.correctKeys + state.missKeys;
   const acc = total > 0 ? (state.correctKeys / total) * 100 : 100;
 
+  const line = RANK_LINES[rankOf(kpm, acc)];
+  $("serif-name").textContent = state.girlName;
+  $("result-serif").textContent = line;
   $("result-time").textContent = sec.toFixed(1) + " 秒";
   $("result-kpm").textContent = String(kpm);
   $("result-acc").textContent = acc.toFixed(1) + " %";
   $("result-miss").textContent = String(state.missKeys);
-  $("result-rank").textContent = rankOf(kpm, acc);
   showScreen("result");
-  speak("おつかれさま!");
+  speak(line.replace(/[❤︎♡]/g, "")); // 記号は読み上げない
 }
 
 function rankOf(kpm, acc) {
