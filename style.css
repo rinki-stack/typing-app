@@ -341,12 +341,23 @@ body {
 /* ---- 画面下のキーボード ---- */
 
 .keyboard {
+  position: relative;
   margin-top: 1.6em;
   display: flex;
   flex-direction: column;
   gap: 0.45em;
   align-items: center;
   user-select: none;
+}
+
+.hand {
+  position: absolute;
+  pointer-events: none;
+  fill: var(--accent2);
+  opacity: 0.3;
+  z-index: 2;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 78%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 78%);
 }
 
 .kb-row {

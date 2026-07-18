@@ -425,6 +425,7 @@ function showScreen(name) {
   document.querySelectorAll(".screen").forEach((el) => el.classList.remove("active"));
   $("screen-" + name).classList.add("active");
   window.scrollTo(0, 0); // 一覧を下までスクロールした状態から切り替わっても上から見せる
+  if (name === "game") placeHands(); // キーボードが表示されてから手の位置を合わせる
 }
 
 function pickWords() {
@@ -472,6 +473,7 @@ function renderRomaji() {
 }
 
 function updateHud() {
+  placeHands(); // 画面サイズ確定前に配置できなかった場合のリカバリ兼リサイズ追従
   $("hud-progress").textContent = `${state.wordIndex + 1} / ${state.words.length}`;
   $("hud-miss").textContent = state.missKeys;
   const sec = (performance.now() - state.startTime) / 1000;
@@ -552,6 +554,61 @@ function buildKeyboard() {
   });
 }
 buildKeyboard();
+
+/* ---- ホームポジションの手(薄いシルエット) ----
+   viewBox内: 指4本(小指→人差し指)の中心 x=15.5/35.5/55.5/75.5、指先 y=14(人差し指) */
+const HAND_SVG_BODY = `
+  <rect x="8"  y="34" width="15" height="61" rx="7.5"/>
+  <rect x="28" y="18" width="15" height="77" rx="7.5"/>
+  <rect x="48" y="12" width="15" height="83" rx="7.5"/>
+  <rect x="68" y="14" width="15" height="81" rx="7.5"/>
+  <rect x="8"  y="80" width="84" height="48" rx="18"/>
+  <rect x="88" y="84" width="14" height="42" rx="7" transform="rotate(-35 95 90)"/>`;
+
+function ensureHand(id, mirrored) {
+  let svg = document.getElementById(id);
+  if (!svg) {
+    svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.id = id;
+    svg.setAttribute("viewBox", "0 0 110 140");
+    svg.classList.add("hand");
+    svg.innerHTML = mirrored
+      ? `<g transform="translate(110,0) scale(-1,1)">${HAND_SVG_BODY}</g>`
+      : `<g>${HAND_SVG_BODY}</g>`;
+    $("keyboard").appendChild(svg);
+  }
+  return svg;
+}
+
+function placeHands() {
+  const kb = $("keyboard");
+  const keyD = kb.querySelector('[data-key="d"]');
+  const keyF = kb.querySelector('[data-key="f"]');
+  const keyJ = kb.querySelector('[data-key="j"]');
+  if (!keyD || !keyF || !keyJ) return;
+  const kbRect = kb.getBoundingClientRect();
+  if (kbRect.width === 0) return; // 画面非表示中は後回し
+  const fRect = keyF.getBoundingClientRect();
+  const jRect = keyJ.getBoundingClientRect();
+  const pitch = fRect.left - keyD.getBoundingClientRect().left; // 隣のキーとの間隔
+  const scale = pitch / 20;
+
+  // 指先がホームポジションのキー面に少し重なる高さ
+  const tipTop = (rect) => rect.top - kbRect.top + rect.height * 0.3 - 14 * scale;
+
+  const left = ensureHand("hand-left", false);
+  left.style.width = 110 * scale + "px";
+  left.style.height = 140 * scale + "px";
+  left.style.left = fRect.left - kbRect.left + fRect.width / 2 - 75.5 * scale + "px";
+  left.style.top = tipTop(fRect) + "px";
+
+  const right = ensureHand("hand-right", true);
+  right.style.width = 110 * scale + "px";
+  right.style.height = 140 * scale + "px";
+  right.style.left = jRect.left - kbRect.left + jRect.width / 2 - 34.5 * scale + "px";
+  right.style.top = tipTop(jRect) + "px";
+}
+window.addEventListener("resize", placeHands);
 
 /* 次に打つキーを光らせる */
 function highlightNextKey(nextChar) {
