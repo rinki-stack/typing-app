@@ -362,6 +362,27 @@ body {
   margin-left: 2.8em;
 }
 
+.kb-row:nth-child(4) {
+  margin-left: 4.2em;
+}
+
+.key.home {
+  position: relative;
+}
+
+.key.home::after {
+  content: "";
+  position: absolute;
+  bottom: 0.28em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.7em;
+  height: 0.14em;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
 .key {
   width: 2.3em;
   height: 2.3em;

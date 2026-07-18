@@ -528,10 +528,12 @@ function rankOf(kpm, acc) {
  * 画面下のキーボード表示
  * ================================================================ */
 const KEY_ROWS = [
-  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "-"],
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-"],
+  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
   ["z", "x", "c", "v", "b", "n", "m", ",", "."],
 ];
+const HOME_KEYS = ["f", "j"]; // ホームポジションの目印(点)を付けるキー
 
 function buildKeyboard() {
   const kb = $("keyboard");
@@ -541,7 +543,7 @@ function buildKeyboard() {
     div.className = "kb-row";
     row.forEach((k) => {
       const key = document.createElement("span");
-      key.className = "key";
+      key.className = HOME_KEYS.includes(k) ? "key home" : "key";
       key.dataset.key = k;
       key.textContent = k.toUpperCase();
       div.appendChild(key);
