@@ -468,6 +468,7 @@ function renderRomaji() {
   const { done, rest } = romajiView();
   $("romaji-done").textContent = done;
   $("romaji-rest").textContent = rest;
+  highlightNextKey(rest[0]);
 }
 
 function updateHud() {
@@ -523,6 +524,50 @@ function rankOf(kpm, acc) {
 /* ================================================================
  * キーイベント
  * ================================================================ */
+/* ================================================================
+ * 画面下のキーボード表示
+ * ================================================================ */
+const KEY_ROWS = [
+  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "-"],
+  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+  ["z", "x", "c", "v", "b", "n", "m", ",", "."],
+];
+
+function buildKeyboard() {
+  const kb = $("keyboard");
+  kb.innerHTML = "";
+  KEY_ROWS.forEach((row) => {
+    const div = document.createElement("div");
+    div.className = "kb-row";
+    row.forEach((k) => {
+      const key = document.createElement("span");
+      key.className = "key";
+      key.dataset.key = k;
+      key.textContent = k.toUpperCase();
+      div.appendChild(key);
+    });
+    kb.appendChild(div);
+  });
+}
+buildKeyboard();
+
+/* 次に打つキーを光らせる */
+function highlightNextKey(nextChar) {
+  document.querySelectorAll(".key.next").forEach((k) => k.classList.remove("next"));
+  if (!nextChar) return;
+  const el = document.querySelector(`.key[data-key="${CSS.escape(nextChar)}"]`);
+  if (el) el.classList.add("next");
+}
+
+/* 押したキーを一瞬へこませる */
+function flashKey(ch) {
+  const el = document.querySelector(`.key[data-key="${CSS.escape(ch)}"]`);
+  if (!el) return;
+  el.classList.remove("pressed");
+  void el.offsetWidth;
+  el.classList.add("pressed");
+}
+
 /* 女の子一覧のカードを生成 */
 function renderGirlList() {
   const list = $("girl-list");
@@ -580,6 +625,7 @@ document.addEventListener("keydown", (e) => {
   e.preventDefault();
 
   const girl = GIRLS[state.girlName] || DEFAULT_GIRL;
+  flashKey(e.key.toLowerCase());
   const result = processKey(e.key.toLowerCase());
   if (result === "miss") {
     state.missKeys += 1;
