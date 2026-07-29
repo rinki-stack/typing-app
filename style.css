@@ -108,7 +108,7 @@ body {
 /* ---- 円形レイアウト: 中央にタイトル、まわりに女の子 ---- */
 .stage-ring {
   position: relative;
-  height: clamp(400px, 47vw, 700px);
+  height: clamp(400px, 44vw, 660px);
 }
 
 /* 散らばるハート */
@@ -138,10 +138,10 @@ body {
 .sp1  { top: 12%; left: 26%; width: 3.4%; }
 .sp2  { top: 30%; left: 8%;  width: 2.2%; }
 .sp3  { top: 8%;  left: 62%; width: 2.6%; }
-.sp4  { top: 24%; left: 43%; width: 4.2%; }
+.sp4  { top: 17%; left: 41%; width: 4.2%; }
 .sp5  { top: 46%; left: 20%; width: 2%; }
 .sp6  { top: 38%; left: 74%; width: 3.6%; }
-.sp7  { top: 62%; left: 12%; width: 2.8%; }
+.sp7  { top: 66%; left: 9%;  width: 2.8%; }
 .sp8  { top: 70%; left: 55%; width: 2.2%; }
 .sp9  { top: 20%; left: 88%; width: 3%; }
 .sp10 { top: 78%; left: 82%; width: 3.4%; }
@@ -168,13 +168,13 @@ body {
   mask-image: linear-gradient(to bottom, #000 54%, transparent 88%);
 }
 
-/* 円周上の位置(中央上→左→右→左下→右下) */
-.sc3 { left: 50%; top: 37%; z-index: 3; width: clamp(104px, 18.5%, 240px); }
+/* 円周上の位置(中央上→左→右→左下→右下)。手前にくる子ほど z-index を大きく */
+.sc3 { left: 50%; top: 34%; z-index: 2; width: clamp(104px, 18.5%, 240px); }
 .stage-card.sc3 figcaption { bottom: 52%; } /* 中央のタイトルと重ならない高さに */
-.sc2 { left: 13%; top: 45%; z-index: 2; }
-.sc4 { left: 87%; top: 45%; z-index: 2; }
-.sc1 { left: 21%; top: 71%; z-index: 1; }
-.sc5 { left: 79%; top: 71%; z-index: 1; }
+.sc2 { left: 16%; top: 46%; z-index: 1; }
+.sc4 { left: 84%; top: 46%; z-index: 1; }
+.sc1 { left: 28%; top: 73%; z-index: 3; }
+.sc5 { left: 72%; top: 73%; z-index: 3; }
 
 /* 名前タグ */
 .stage-card figcaption {
@@ -209,7 +209,7 @@ body {
   top: 52%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  width: min(66%, 780px);
+  width: min(54%, 660px);
   text-align: center;
   pointer-events: none;
 }
@@ -228,7 +228,7 @@ body {
 
 .stage-title {
   margin-top: 0.15em;
-  font-size: clamp(26px, 5.4vw, 72px);
+  font-size: clamp(24px, 4.6vw, 62px);
   font-weight: 900;
   letter-spacing: 0.03em;
   color: #e8489e;
@@ -774,8 +774,8 @@ body {
 @media (max-width: 620px) {
   .stage-text { width: 82%; }
   .stage-sub { font-size: 12px; padding: 0.3em 0.9em; }
-  .sc2 { left: 15%; }
-  .sc4 { left: 85%; }
-  .sc1 { left: 23%; top: 76%; }
-  .sc5 { left: 77%; top: 76%; }
+  .sc2 { left: 17%; }
+  .sc4 { left: 83%; }
+  .sc1 { left: 29%; top: 75%; }
+  .sc5 { left: 71%; top: 75%; }
 }
