@@ -119,7 +119,7 @@ body {
 .hh4 { bottom: 13%; left: 7%;  font-size: 5.5vw; }
 .hh5 { bottom: 14%; right: 7%; font-size: 6vw; }
 
-/* 女の子(画面幅に応じて折り返して並び替わる) */
+/* 女の子(重ねて並べる。画面幅に応じて折り返して並び替わる) */
 .stage-girls {
   position: relative;
   z-index: 2;
@@ -127,36 +127,37 @@ body {
   flex-wrap: wrap;
   align-items: flex-end; /* 足元のラインを揃えて立たせる */
   justify-content: center;
-  gap: clamp(4px, 0.8vw, 14px);
-  padding: clamp(16px, 3.5vw, 44px) 12px 0;
+  gap: 0;
+  padding: clamp(14px, 3vw, 40px) 0 0;
 }
 
-/* 広い画面: 5人が横1列 */
+/* 広い画面: 5人が横1列。少しずつ重ねて隙間なく並べる */
 .stage-card {
   position: relative;
-  width: min(17.5vw, 230px);
-  margin: 0;
+  width: 23%;
+  margin: 0 -1.9%;
   text-align: center;
 }
 
-/* 中央の子ほど大きく見せて奥行きを出す(横1列のとき) */
-.sc1 { width: min(15.5vw, 200px); }
-.sc2 { width: min(18.5vw, 244px); }
-.sc3 { width: min(17vw, 224px); }
-.sc4 { width: min(18.5vw, 244px); }
-.sc5 { width: min(15.5vw, 200px); }
+/* 中央の子ほど手前に。名前タグは互い違いの高さに置く */
+.sc1 { z-index: 1; --tag: 6%; }
+.sc2 { z-index: 2; --tag: 20%; }
+.sc3 { z-index: 3; --tag: 8%; }
+.sc4 { z-index: 2; --tag: 20%; }
+.sc5 { z-index: 1; --tag: 6%; }
 
 /* 中くらいの画面: 3人 + 2人 に組み変わる */
 @media (max-width: 999px) {
   .stage-girls .stage-card {
-    width: 30%;
+    width: 34%;
+    --tag: 30%; /* 折り返し時はタイトルに隠れない高さに揃える */
   }
 }
 
 /* 狭い画面: 2人 + 2人 + 1人 に組み変わる */
 @media (max-width: 699px) {
   .stage-girls .stage-card {
-    width: 45%;
+    width: 48%;
   }
 }
 
@@ -173,10 +174,11 @@ body {
     drop-shadow(0 6px 14px #ec489933);
 }
 
+/* 名前タグは互い違いの高さに(参考デザイン風) */
 .stage-card figcaption {
   position: absolute;
   left: 50%;
-  bottom: 4%;
+  bottom: var(--tag, 8%);
   transform: translateX(-50%);
   z-index: 2;
   width: fit-content;
@@ -194,9 +196,10 @@ body {
 /* タイトルテキスト(流れに沿って配置される) */
 .stage-text {
   position: relative;
-  z-index: 2;
+  z-index: 5; /* 女の子より手前に重ねる */
   text-align: center;
-  padding: clamp(12px, 2.5vw, 30px) 12px clamp(20px, 3.5vw, 44px);
+  margin-top: -5%;
+  padding: 0 12px clamp(18px, 3vw, 40px);
 }
 
 .stage-sub {
