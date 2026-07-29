@@ -26,6 +26,13 @@ body {
   background: radial-gradient(circle at 20% 10%, var(--bg2) 0%, var(--bg1) 60%), var(--bg1);
   background-attachment: fixed;
   color: var(--text);
+  overflow-x: hidden;
+}
+
+/* コンテナの中から画面の横幅いっぱいまで広げる */
+.bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 .container {
@@ -65,9 +72,9 @@ body {
 }
 
 .hero-banner {
-  width: 100%;
-  max-width: 100%;
-  border-radius: 14px;
+  display: block;
+  align-self: flex-start; /* 中央寄せの二重補正を防ぐ */
+  border-radius: 0;
   box-shadow: 0 12px 44px #f472b64d;
 }
 
@@ -139,8 +146,14 @@ body {
 
 .girl-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* ウィンドウ幅に合わせて1行あたりの枚数が自動で変わる */
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 0.8em;
+  padding: 0 1.2em;
+}
+
+.list-title.bleed {
+  border-radius: 0;
 }
 
 .girl {
@@ -214,11 +227,6 @@ body {
   font-size: 0.85em;
 }
 
-@media (max-width: 560px) {
-  .girl-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 
 .btn-home {
   font-family: inherit;
