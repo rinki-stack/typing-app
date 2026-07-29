@@ -71,11 +71,172 @@ body {
   margin-bottom: 0;
 }
 
-.hero-banner {
-  display: block;
+/* ---- トップの動くバナー(CSSで描画) ---- */
+
+.hero-stage {
+  position: relative;
   align-self: flex-start; /* 中央寄せの二重補正を防ぐ */
-  border-radius: 0;
-  box-shadow: 0 12px 44px #f472b64d;
+  aspect-ratio: 1097 / 693;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, #f5b6d2 7%, transparent 8%) 0 0 / 3.2vw 3.2vw,
+    linear-gradient(160deg, #fff3f8, #ffdeed);
+  border-top: 0.35vw solid #f472b6;
+  border-bottom: 0.35vw solid #f472b6;
+}
+
+/* 上下の TYPING PARLOR 帯(ゆっくり流れる) */
+.stage-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: #fff;
+  border-top: 0.18vw solid #f9a8d4;
+  border-bottom: 0.18vw solid #f9a8d4;
+  padding: 0.45vw 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.strip-top { top: 0; }
+.strip-bottom { bottom: 0; }
+
+.stage-strip span {
+  display: inline-block;
+  font-weight: 800;
+  color: #f472b6;
+  letter-spacing: 0.2em;
+  font-size: clamp(8px, 1.6vw, 18px);
+  animation: strip-scroll 30s linear infinite;
+}
+
+@keyframes strip-scroll {
+  to { transform: translateX(-50%); }
+}
+
+/* 散らばるハート(鼓動) */
+.heart {
+  position: absolute;
+  z-index: 1;
+  color: #f472b6;
+  line-height: 1;
+  animation: heart-beat 2.4s ease-in-out infinite;
+}
+
+.hh1 { top: 9%;  left: 6%;  font-size: 4.5vw; }
+.hh2 { top: 12%; left: 47%; font-size: 3.2vw; animation-delay: 0.4s; }
+.hh3 { top: 8%;  right: 6%; font-size: 5vw;   animation-delay: 0.8s; }
+.hh4 { bottom: 13%; left: 7%;  font-size: 5.5vw; animation-delay: 1.2s; }
+.hh5 { bottom: 14%; right: 7%; font-size: 6vw;   animation-delay: 1.6s; }
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* 女の子カード(ふわふわ浮く) */
+.stage-girls {
+  position: absolute;
+  inset: 12% 4% 13%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6vw;
+}
+
+.stage-card {
+  width: 16.5%;
+  margin: 0;
+  text-align: center;
+  animation: card-float 3.8s ease-in-out infinite;
+}
+
+.sc1 { --tilt: -6deg; }
+.sc2 { --tilt: -2.5deg; animation-delay: 0.5s; }
+.sc3 { --tilt: 0deg;    animation-delay: 1s; }
+.sc4 { --tilt: 2.5deg;  animation-delay: 1.5s; }
+.sc5 { --tilt: 6deg;    animation-delay: 2s; }
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt)); }
+  50% { transform: translateY(-1.1vw) rotate(var(--tilt)); }
+}
+
+.stage-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 0.4vw solid #fff;
+  border-radius: 1vw;
+  box-shadow: 0 0.8vw 2vw #ec489947;
+}
+
+.stage-card figcaption {
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  white-space: nowrap;
+  margin: -1.1vw auto 0;
+  background: #ec4899;
+  border: 0.18vw solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(8px, 1.5vw, 17px);
+  padding: 0.18em 0.75em;
+  box-shadow: 0 0.3vw 0.8vw #ec489966;
+}
+
+/* タイトルテキスト(ぽよんと弾む) */
+.stage-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12.5%;
+  z-index: 3;
+  text-align: center;
+  pointer-events: none;
+}
+
+.stage-sub {
+  display: inline-block;
+  background: linear-gradient(90deg, #ec4899, #f472b6);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(9px, 2.1vw, 23px);
+  letter-spacing: 0.08em;
+  padding: 0.35em 1.3em;
+  border-radius: 999px;
+  box-shadow: 0 0.3vw 1vw #ec489966;
+}
+
+.stage-title {
+  margin-top: 0.1em;
+  font-size: clamp(24px, 6.8vw, 78px);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: #e8489e;
+  -webkit-text-stroke: 0.13em #fff;
+  paint-order: stroke fill;
+  text-shadow: 0 0.5vw 1.5vw #ec489955;
+  animation: title-bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes title-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-strip span,
+  .heart,
+  .stage-card,
+  .stage-title {
+    animation: none;
+  }
 }
 
 .scroll-hint {
@@ -608,5 +769,14 @@ body {
 
   .hero {
     min-height: 60vh; /* スマホでは間延びしないように */
+  }
+
+  /* バナー内: 名前タグとテキストが重ならないように */
+  .stage-girls {
+    inset: 13% 3% 24%;
+  }
+
+  .stage-text {
+    bottom: 8%;
   }
 }
