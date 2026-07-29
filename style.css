@@ -128,7 +128,7 @@ body {
   align-items: flex-end; /* 足元のラインを揃えて立たせる */
   justify-content: center;
   gap: 0;
-  padding: clamp(10px, 2.5vw, 40px) 0 0;
+  padding: clamp(24px, 6vw, 92px) 2% 0;
 }
 
 /* === 大きい画面のデザイン: 5人が横1列に重なって並ぶ ===
@@ -136,16 +136,20 @@ body {
 .stage-card {
   position: relative;
   width: 23%;
-  margin: 0 -1.9%;
+  margin: 0 -1.2%;
   text-align: center;
 }
 
-/* 中央の子ほど手前に。名前タグは互い違いの高さに置く */
-.sc1 { z-index: 1; --tag: 20%; }
-.sc2 { z-index: 2; --tag: 32%; }
-.sc3 { z-index: 3; --tag: 42%; }
-.sc4 { z-index: 2; --tag: 32%; }
-.sc5 { z-index: 1; --tag: 20%; }
+/* アーチ状に配置: 中央ほど大きく・高く、外側ほど小さく・低く */
+.stage-card {
+  transform: translateY(var(--lift, 0));
+}
+
+.sc1 { z-index: 1; width: 19%; --lift: 14%; --tag: 12%; }
+.sc2 { z-index: 2; width: 23%; --lift: 4%;  --tag: 20%; }
+.sc3 { z-index: 3; width: 28%; --lift: -9%; --tag: 32%; }
+.sc4 { z-index: 2; width: 23%; --lift: 4%;  --tag: 20%; }
+.sc5 { z-index: 1; width: 19%; --lift: 14%; --tag: 12%; }
 
 /* === 小さい画面のデザイン: 並びは同じまま、要素だけ引き締める === */
 @media (max-width: 720px) {
