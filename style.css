@@ -124,14 +124,15 @@ body {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* 常に横一列。折り返しによる崩れをなくす */
   align-items: flex-end; /* 足元のラインを揃えて立たせる */
   justify-content: center;
   gap: 0;
-  padding: clamp(14px, 3vw, 40px) 0 0;
+  padding: clamp(10px, 2.5vw, 40px) 0 0;
 }
 
-/* 広い画面: 5人が横1列。少しずつ重ねて隙間なく並べる */
+/* === 大きい画面のデザイン: 5人が横1列に重なって並ぶ ===
+   幅の値はすべて%/vwなので、ウィンドウを動かすと滑らかに追従する */
 .stage-card {
   position: relative;
   width: 23%;
@@ -140,24 +141,24 @@ body {
 }
 
 /* 中央の子ほど手前に。名前タグは互い違いの高さに置く */
-.sc1 { z-index: 1; --tag: 6%; }
-.sc2 { z-index: 2; --tag: 20%; }
-.sc3 { z-index: 3; --tag: 8%; }
-.sc4 { z-index: 2; --tag: 20%; }
-.sc5 { z-index: 1; --tag: 6%; }
+.sc1 { z-index: 1; --tag: 20%; }
+.sc2 { z-index: 2; --tag: 32%; }
+.sc3 { z-index: 3; --tag: 42%; }
+.sc4 { z-index: 2; --tag: 32%; }
+.sc5 { z-index: 1; --tag: 20%; }
 
-/* 中くらいの画面: 3人 + 2人 に組み変わる */
-@media (max-width: 999px) {
-  .stage-girls .stage-card {
-    width: 34%;
-    --tag: 30%; /* 折り返し時はタイトルに隠れない高さに揃える */
+/* === 小さい画面のデザイン: 並びは同じまま、要素だけ引き締める === */
+@media (max-width: 720px) {
+  .stage-card {
+    --tag: 12%; /* 名前タグの高さを揃える */
   }
+  .sc3 { --tag: 24%; }
 }
 
-/* 狭い画面: 2人 + 2人 + 1人 に組み変わる */
-@media (max-width: 699px) {
-  .stage-girls .stage-card {
-    width: 48%;
+/* かなり狭い画面: 名前タグは省いてすっきり見せる(下の一覧で確認できる) */
+@media (max-width: 520px) {
+  .stage-card figcaption {
+    display: none;
   }
 }
 
@@ -165,7 +166,7 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  max-height: clamp(190px, 30vw, 400px); /* 折り返しても背が高くなりすぎない */
+  max-height: min(38vw, 420px); /* 幅に比例して滑らかに変わる(段差なし) */
   object-fit: contain;
   /* 切り抜きのふちに白いグロー(バナーと同じ雰囲気) */
   filter:
@@ -201,6 +202,8 @@ body {
   margin-top: -5%;
   padding: 0 12px clamp(18px, 3vw, 40px);
 }
+
+
 
 .stage-sub {
   display: inline-block;
