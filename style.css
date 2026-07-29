@@ -74,6 +74,8 @@ body {
 /* ---- トップの動くバナー(CSSで描画) ---- */
 
 .hero-stage {
+  /* バナー内すべての基準サイズ。画面が大きいほど大きくなる */
+  --u: min(1vw, 1.5vh);
   position: relative;
   align-self: flex-start; /* 中央寄せの二重補正を防ぐ */
   overflow: hidden;
@@ -102,13 +104,13 @@ body {
   font-weight: 800;
   color: #f472b6;
   letter-spacing: 0.2em;
-  font-size: clamp(10px, 1.4vw, 16px);
+  font-size: max(10px, calc(1.4 * var(--u)));
 }
 
 /* ---- 円形レイアウト: 中央にタイトル、まわりに女の子 ---- */
 .stage-ring {
   position: relative;
-  height: clamp(430px, 56vw, 820px);
+  height: max(430px, calc(56 * var(--u)));
 }
 
 /* 散らばるハート */
@@ -119,11 +121,11 @@ body {
   line-height: 1;
 }
 
-.hh1 { top: 6%;  left: 4%;  font-size: 4vw; }
-.hh2 { top: 4%;  left: 48%; font-size: 2.6vw; }
-.hh3 { top: 7%;  right: 4%; font-size: 4.4vw; }
-.hh4 { bottom: 6%; left: 5%;  font-size: 5vw; }
-.hh5 { bottom: 7%; right: 5%; font-size: 5.4vw; }
+.hh1 { top: 6%;  left: 4%;  font-size: calc(4 * var(--u)); }
+.hh2 { top: 4%;  left: 48%; font-size: calc(2.6 * var(--u)); }
+.hh3 { top: 7%;  right: 4%; font-size: calc(4.4 * var(--u)); }
+.hh4 { bottom: 6%; left: 5%;  font-size: calc(5 * var(--u)); }
+.hh5 { bottom: 7%; right: 5%; font-size: calc(5.4 * var(--u)); }
 
 /* 白いキラキラ */
 .sparkle {
@@ -149,7 +151,7 @@ body {
 /* 女の子は円を描くように配置(下半身はふわっと消える) */
 .stage-card {
   position: absolute;
-  width: clamp(112px, 16.5%, 218px);
+  width: max(112px, calc(16.5 * var(--u)));
   margin: 0;
   text-align: center;
   transform: translate(-50%, -50%);
@@ -159,7 +161,7 @@ body {
   display: block;
   width: 100%;
   height: auto; /* 切り抜きの形をそのまま活かす(四角い縁が出ない) */
-  max-height: clamp(155px, 27vw, 310px); /* 縦長の子も高さを揃える */
+  max-height: max(155px, calc(27 * var(--u))); /* 縦長の子も高さを揃える */
   object-fit: contain;
   object-position: top center;
   filter:
@@ -175,7 +177,7 @@ body {
 /* top は「頭の位置」。全員この基準で揃うので顔の高さがそろう */
 .stage-card { transform: translateX(-50%); }
 
-.sc3 { left: 50%; top: 4%;  z-index: 2; width: clamp(124px, 18.5%, 240px); }
+.sc3 { left: 50%; top: 4%;  z-index: 2; width: max(124px, calc(18.5 * var(--u))); }
 .stage-card.sc3 figcaption { bottom: 52%; } /* 中央のタイトルと重ならない高さに */
 .stage-card.sc1 figcaption,
 .stage-card.sc5 figcaption { bottom: 18%; } /* 下段は帯に掛からない高さに */
@@ -198,7 +200,7 @@ body {
   border-radius: 999px;
   color: #fff;
   font-weight: 800;
-  font-size: clamp(10px, 1.25vw, 15px);
+  font-size: max(10px, calc(1.25 * var(--u)));
   padding: 0.18em 0.7em;
   box-shadow: 0 3px 8px #ec489966;
 }
@@ -217,7 +219,7 @@ body {
   top: 47%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  width: min(54%, 660px);
+  width: 54%;
   text-align: center;
   pointer-events: none;
 }
@@ -227,7 +229,7 @@ body {
   background: linear-gradient(90deg, #ec4899, #f472b6);
   color: #fff;
   font-weight: 800;
-  font-size: clamp(13px, 2vw, 24px);
+  font-size: max(13px, calc(2 * var(--u)));
   letter-spacing: 0.08em;
   padding: 0.35em 1.3em;
   border-radius: 999px;
@@ -236,7 +238,7 @@ body {
 
 .stage-title {
   margin-top: 0.15em;
-  font-size: clamp(24px, 4.6vw, 62px);
+  font-size: max(24px, calc(4.6 * var(--u)));
   font-weight: 900;
   letter-spacing: 0.03em;
   color: #e8489e;
