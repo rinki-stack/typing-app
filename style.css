@@ -119,62 +119,68 @@ body {
 .hh4 { bottom: 13%; left: 7%;  font-size: 5.5vw; }
 .hh5 { bottom: 14%; right: 7%; font-size: 6vw; }
 
-/* 女の子カード(画面幅に応じて折り返して並び替わる) */
+/* 女の子(画面幅に応じて折り返して並び替わる) */
 .stage-girls {
   position: relative;
   z-index: 2;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end; /* 足元のラインを揃えて立たせる */
   justify-content: center;
-  gap: clamp(12px, 1.8vw, 26px);
-  padding: clamp(20px, 4.5vw, 60px) 16px 10px;
+  gap: clamp(4px, 0.8vw, 14px);
+  padding: clamp(16px, 3.5vw, 44px) 12px 0;
 }
 
 /* 広い画面: 5人が横1列 */
 .stage-card {
-  width: min(16.5vw, 215px);
+  position: relative;
+  width: min(17.5vw, 230px);
   margin: 0;
   text-align: center;
-  transform: rotate(var(--tilt));
 }
+
+/* 中央の子ほど大きく見せて奥行きを出す(横1列のとき) */
+.sc1 { width: min(15.5vw, 200px); }
+.sc2 { width: min(18.5vw, 244px); }
+.sc3 { width: min(17vw, 224px); }
+.sc4 { width: min(18.5vw, 244px); }
+.sc5 { width: min(15.5vw, 200px); }
 
 /* 中くらいの画面: 3人 + 2人 に組み変わる */
 @media (max-width: 999px) {
-  .stage-card {
-    width: 31%;
+  .stage-girls .stage-card {
+    width: 30%;
   }
 }
 
 /* 狭い画面: 2人 + 2人 + 1人 に組み変わる */
 @media (max-width: 699px) {
-  .stage-card {
-    width: 46%;
+  .stage-girls .stage-card {
+    width: 45%;
   }
 }
-
-.sc1 { --tilt: -6deg; }
-.sc2 { --tilt: -2.5deg; }
-.sc3 { --tilt: 0deg; }
-.sc4 { --tilt: 2.5deg; }
-.sc5 { --tilt: 6deg; }
 
 .stage-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  border: 4px solid #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 22px #ec489947;
+  height: auto;
+  max-height: clamp(190px, 30vw, 400px); /* 折り返しても背が高くなりすぎない */
+  object-fit: contain;
+  /* 切り抜きのふちに白いグロー(バナーと同じ雰囲気) */
+  filter:
+    drop-shadow(0 0 3px #fff)
+    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 6px 14px #ec489933);
 }
 
 .stage-card figcaption {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
   z-index: 2;
   width: fit-content;
   white-space: nowrap;
-  margin: -0.9em auto 0;
   background: #ec4899;
   border: 2px solid #fff;
   border-radius: 999px;
