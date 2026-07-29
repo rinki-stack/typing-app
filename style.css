@@ -64,6 +64,13 @@ body {
   margin-bottom: 0;
 }
 
+.hero-banner {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 12px 44px #f472b64d;
+}
+
 .scroll-hint {
   color: var(--accent2);
   font-size: 0.95rem;
