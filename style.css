@@ -131,11 +131,26 @@ body {
   padding: clamp(20px, 4.5vw, 60px) 16px 10px;
 }
 
+/* 広い画面: 5人が横1列 */
 .stage-card {
-  width: clamp(132px, 16.5vw, 215px);
+  width: min(16.5vw, 215px);
   margin: 0;
   text-align: center;
   transform: rotate(var(--tilt));
+}
+
+/* 中くらいの画面: 3人 + 2人 に組み変わる */
+@media (max-width: 999px) {
+  .stage-card {
+    width: 31%;
+  }
+}
+
+/* 狭い画面: 2人 + 2人 + 1人 に組み変わる */
+@media (max-width: 699px) {
+  .stage-card {
+    width: 46%;
+  }
 }
 
 .sc1 { --tilt: -6deg; }
