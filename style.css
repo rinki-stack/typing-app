@@ -105,7 +105,13 @@ body {
   font-size: clamp(10px, 1.4vw, 16px);
 }
 
-/* 散らばるハート(鼓動) */
+/* ---- 円形レイアウト: 中央にタイトル、まわりに女の子 ---- */
+.stage-ring {
+  position: relative;
+  height: clamp(400px, 47vw, 700px);
+}
+
+/* 散らばるハート */
 .heart {
   position: absolute;
   z-index: 1;
@@ -113,77 +119,68 @@ body {
   line-height: 1;
 }
 
-.hh1 { top: 9%;  left: 6%;  font-size: 4.5vw; }
-.hh2 { top: 12%; left: 47%; font-size: 3.2vw; }
-.hh3 { top: 8%;  right: 6%; font-size: 5vw; }
-.hh4 { bottom: 13%; left: 7%;  font-size: 5.5vw; }
-.hh5 { bottom: 14%; right: 7%; font-size: 6vw; }
+.hh1 { top: 6%;  left: 4%;  font-size: 4vw; }
+.hh2 { top: 4%;  left: 48%; font-size: 2.6vw; }
+.hh3 { top: 7%;  right: 4%; font-size: 4.4vw; }
+.hh4 { bottom: 6%; left: 5%;  font-size: 5vw; }
+.hh5 { bottom: 7%; right: 5%; font-size: 5.4vw; }
 
-/* 女の子(重ねて並べる。画面幅に応じて折り返して並び替わる) */
-.stage-girls {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-wrap: nowrap; /* 常に横一列。折り返しによる崩れをなくす */
-  align-items: flex-end; /* 足元のラインを揃えて立たせる */
-  justify-content: center;
-  gap: 0;
-  padding: clamp(24px, 6vw, 92px) 2% 0;
+/* 白いキラキラ */
+.sparkle {
+  position: absolute;
+  z-index: 4;
+  aspect-ratio: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0C54 36 64 46 100 50 64 54 54 64 50 100 46 64 36 54 0 50 36 46 46 36 50 0Z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat;
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px #ffd6ea);
+  pointer-events: none;
 }
 
-/* === 大きい画面のデザイン: 5人が横1列に重なって並ぶ ===
-   幅の値はすべて%/vwなので、ウィンドウを動かすと滑らかに追従する */
+.sp1  { top: 12%; left: 26%; width: 3.4%; }
+.sp2  { top: 30%; left: 8%;  width: 2.2%; }
+.sp3  { top: 8%;  left: 62%; width: 2.6%; }
+.sp4  { top: 24%; left: 43%; width: 4.2%; }
+.sp5  { top: 46%; left: 20%; width: 2%; }
+.sp6  { top: 38%; left: 74%; width: 3.6%; }
+.sp7  { top: 62%; left: 12%; width: 2.8%; }
+.sp8  { top: 70%; left: 55%; width: 2.2%; }
+.sp9  { top: 20%; left: 88%; width: 3%; }
+.sp10 { top: 78%; left: 82%; width: 3.4%; }
+
+/* 女の子は円を描くように配置(下半身はふわっと消える) */
 .stage-card {
-  position: relative;
-  width: 23%;
-  margin: 0 -1.2%;
+  position: absolute;
+  width: clamp(96px, 16.5%, 218px);
+  margin: 0;
   text-align: center;
-}
-
-/* アーチ状に配置: 中央ほど大きく・高く、外側ほど小さく・低く */
-.stage-card {
-  transform: translateY(var(--lift, 0));
-}
-
-.sc1 { z-index: 1; width: 19%; --lift: 14%; --tag: 12%; }
-.sc2 { z-index: 2; width: 23%; --lift: 4%;  --tag: 20%; }
-.sc3 { z-index: 3; width: 28%; --lift: -9%; --tag: 32%; }
-.sc4 { z-index: 2; width: 23%; --lift: 4%;  --tag: 20%; }
-.sc5 { z-index: 1; width: 19%; --lift: 14%; --tag: 12%; }
-
-/* === 小さい画面のデザイン: 並びは同じまま、要素だけ引き締める === */
-@media (max-width: 720px) {
-  .stage-card {
-    --tag: 12%; /* 名前タグの高さを揃える */
-  }
-  .sc3 { --tag: 24%; }
-}
-
-/* かなり狭い画面: 名前タグは省いてすっきり見せる(下の一覧で確認できる) */
-@media (max-width: 520px) {
-  .stage-card figcaption {
-    display: none;
-  }
+  transform: translate(-50%, -50%);
 }
 
 .stage-card img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: min(38vw, 420px); /* 幅に比例して滑らかに変わる(段差なし) */
-  object-fit: contain;
-  /* 切り抜きのふちに白いグロー(バナーと同じ雰囲気) */
+  height: auto; /* 切り抜きの形をそのまま活かす(四角い縁が出ない) */
   filter:
     drop-shadow(0 0 3px #fff)
-    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 0 8px #fff)
     drop-shadow(0 6px 14px #ec489933);
+  /* 下半身はふわっと消す */
+  -webkit-mask-image: linear-gradient(to bottom, #000 54%, transparent 88%);
+  mask-image: linear-gradient(to bottom, #000 54%, transparent 88%);
 }
 
-/* 名前タグは互い違いの高さに(参考デザイン風) */
+/* 円周上の位置(中央上→左→右→左下→右下) */
+.sc3 { left: 50%; top: 37%; z-index: 3; width: clamp(104px, 18.5%, 240px); }
+.stage-card.sc3 figcaption { bottom: 52%; } /* 中央のタイトルと重ならない高さに */
+.sc2 { left: 13%; top: 45%; z-index: 2; }
+.sc4 { left: 87%; top: 45%; z-index: 2; }
+.sc1 { left: 21%; top: 71%; z-index: 1; }
+.sc5 { left: 79%; top: 71%; z-index: 1; }
+
+/* 名前タグ */
 .stage-card figcaption {
   position: absolute;
   left: 50%;
-  bottom: var(--tag, 8%);
+  bottom: 8%;
   transform: translateX(-50%);
   z-index: 2;
   width: fit-content;
@@ -193,21 +190,29 @@ body {
   border-radius: 999px;
   color: #fff;
   font-weight: 800;
-  font-size: clamp(11px, 1.4vw, 16px);
-  padding: 0.18em 0.75em;
+  font-size: clamp(10px, 1.25vw, 15px);
+  padding: 0.18em 0.7em;
   box-shadow: 0 3px 8px #ec489966;
 }
 
-/* タイトルテキスト(流れに沿って配置される) */
-.stage-text {
-  position: relative;
-  z-index: 5; /* 女の子より手前に重ねる */
-  text-align: center;
-  margin-top: -5%;
-  padding: 0 12px clamp(18px, 3vw, 40px);
+/* かなり狭い画面では名前タグを省く(下の一覧で確認できる) */
+@media (max-width: 560px) {
+  .stage-card figcaption {
+    display: none;
+  }
 }
 
-
+/* タイトルは円の中心に */
+.stage-text {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: min(66%, 780px);
+  text-align: center;
+  pointer-events: none;
+}
 
 .stage-sub {
   display: inline-block;
@@ -223,7 +228,7 @@ body {
 
 .stage-title {
   margin-top: 0.15em;
-  font-size: clamp(30px, 6.5vw, 84px);
+  font-size: clamp(26px, 5.4vw, 72px);
   font-weight: 900;
   letter-spacing: 0.03em;
   color: #e8489e;
@@ -763,4 +768,14 @@ body {
   .hero {
     min-height: 60vh; /* スマホでは間延びしないように */
   }
+}
+
+/* 小さい画面: 円を少し詰めて中央のテキストを読みやすく */
+@media (max-width: 620px) {
+  .stage-text { width: 82%; }
+  .stage-sub { font-size: 12px; padding: 0.3em 0.9em; }
+  .sc2 { left: 15%; }
+  .sc4 { left: 85%; }
+  .sc1 { left: 23%; top: 76%; }
+  .sc5 { left: 77%; top: 76%; }
 }
