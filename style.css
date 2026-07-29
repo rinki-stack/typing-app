@@ -146,8 +146,8 @@ body {
 
 .girl-list {
   display: grid;
-  /* ウィンドウ幅に合わせて1行あたりの枚数が自動で変わる */
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  /* ウィンドウ幅に合わせて1行あたりの枚数が自動で変わる(スマホでも2枚並ぶ) */
+  grid-template-columns: repeat(auto-fill, minmax(min(40vw, 170px), 1fr));
   gap: 0.8em;
   padding: 0 1.2em;
 }
@@ -321,9 +321,10 @@ body {
 }
 
 .word-display {
-  font-size: 3rem;
+  font-size: clamp(1.7rem, 6.5vw, 3rem);
   font-weight: 700;
   margin-bottom: 0.35em;
+  overflow-wrap: anywhere;
 }
 
 .word-kana {
@@ -334,8 +335,9 @@ body {
 
 .word-romaji {
   font-family: "SF Mono", "Menlo", "Consolas", monospace;
-  font-size: 1.6rem;
+  font-size: clamp(1.05rem, 4vw, 1.6rem);
   letter-spacing: 0.12em;
+  overflow-wrap: anywhere; /* 長い単語は折り返す */
 }
 
 .romaji-done {
@@ -363,6 +365,8 @@ body {
   gap: 0.45em;
   align-items: center;
   user-select: none;
+  /* 画面が狭いときはキー全体が縮んで収まる */
+  font-size: min(0.95rem, 2.6vw);
 }
 
 .hand {
@@ -419,7 +423,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 7px;
   font-family: "SF Mono", "Menlo", "Consolas", monospace;
-  font-size: 0.95rem;
+  font-size: inherit;
   font-weight: 700;
   color: var(--muted);
   box-shadow: 0 2px 6px #f472b61a;
@@ -559,4 +563,50 @@ body {
   color: #888;
   font-size: 0.75rem;
   margin-top: 0.6em;
+}
+
+/* ---- スマホ・小さい画面向けの調整 ---- */
+
+@media (max-width: 600px) {
+  #screen-game,
+  #screen-result {
+    margin-top: 5vh;
+  }
+
+  .hud {
+    gap: 0.5em;
+  }
+
+  .hud-item {
+    font-size: 1rem;
+    min-width: 3.2em;
+  }
+
+  .word-card {
+    padding: 1.6em 0.8em;
+  }
+
+  .word-kana {
+    font-size: 1rem;
+  }
+
+  .serif-text {
+    font-size: 1rem;
+  }
+
+  .result-item {
+    font-size: 1.15rem;
+  }
+
+  .price-table {
+    font-size: 0.75rem;
+  }
+
+  .price-table .row-label {
+    width: 5.5em;
+  }
+
+  .hero {
+    min-height: 60vh; /* スマホでは間延びしないように */
+  }
 }
