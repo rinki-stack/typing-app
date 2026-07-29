@@ -108,7 +108,7 @@ body {
 /* ---- 円形レイアウト: 中央にタイトル、まわりに女の子 ---- */
 .stage-ring {
   position: relative;
-  height: clamp(400px, 44vw, 660px);
+  height: clamp(430px, 56vw, 820px);
 }
 
 /* 散らばるハート */
@@ -149,7 +149,7 @@ body {
 /* 女の子は円を描くように配置(下半身はふわっと消える) */
 .stage-card {
   position: absolute;
-  width: clamp(96px, 16.5%, 218px);
+  width: clamp(112px, 16.5%, 218px);
   margin: 0;
   text-align: center;
   transform: translate(-50%, -50%);
@@ -159,22 +159,30 @@ body {
   display: block;
   width: 100%;
   height: auto; /* 切り抜きの形をそのまま活かす(四角い縁が出ない) */
+  max-height: clamp(155px, 27vw, 310px); /* 縦長の子も高さを揃える */
+  object-fit: contain;
+  object-position: top center;
   filter:
     drop-shadow(0 0 3px #fff)
     drop-shadow(0 0 8px #fff)
     drop-shadow(0 6px 14px #ec489933);
   /* 下半身はふわっと消す */
-  -webkit-mask-image: linear-gradient(to bottom, #000 54%, transparent 88%);
-  mask-image: linear-gradient(to bottom, #000 54%, transparent 88%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 46%, transparent 82%);
+  mask-image: linear-gradient(to bottom, #000 46%, transparent 82%);
 }
 
 /* 円周上の位置(中央上→左→右→左下→右下)。手前にくる子ほど z-index を大きく */
-.sc3 { left: 50%; top: 34%; z-index: 2; width: clamp(104px, 18.5%, 240px); }
+/* top は「頭の位置」。全員この基準で揃うので顔の高さがそろう */
+.stage-card { transform: translateX(-50%); }
+
+.sc3 { left: 50%; top: 4%;  z-index: 2; width: clamp(124px, 18.5%, 240px); }
 .stage-card.sc3 figcaption { bottom: 52%; } /* 中央のタイトルと重ならない高さに */
-.sc2 { left: 16%; top: 46%; z-index: 1; }
-.sc4 { left: 84%; top: 46%; z-index: 1; }
-.sc1 { left: 28%; top: 73%; z-index: 3; }
-.sc5 { left: 72%; top: 73%; z-index: 3; }
+.stage-card.sc1 figcaption,
+.stage-card.sc5 figcaption { bottom: 18%; } /* 下段は帯に掛からない高さに */
+.sc2 { left: 16%; top: 17%; z-index: 1; }
+.sc4 { left: 84%; top: 17%; z-index: 1; }
+.sc1 { left: 27%; top: 60%; z-index: 3; } /* 顔がタイトルより下にくる高さ */
+.sc5 { left: 73%; top: 60%; z-index: 3; }
 
 /* 名前タグ */
 .stage-card figcaption {
@@ -206,7 +214,7 @@ body {
 .stage-text {
   position: absolute;
   left: 50%;
-  top: 52%;
+  top: 47%;
   transform: translate(-50%, -50%);
   z-index: 5;
   width: min(54%, 660px);
@@ -776,6 +784,6 @@ body {
   .stage-sub { font-size: 12px; padding: 0.3em 0.9em; }
   .sc2 { left: 17%; }
   .sc4 { left: 83%; }
-  .sc1 { left: 29%; top: 75%; }
-  .sc5 { left: 71%; top: 75%; }
+  .sc1 { left: 28%; top: 62%; }
+  .sc5 { left: 72%; top: 62%; }
 }
