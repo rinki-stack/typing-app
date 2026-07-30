@@ -203,9 +203,12 @@ body {
 }
 
 /* かなり狭い画面では名前タグを省く(下の一覧で確認できる) */
+/* 狭い画面でも名前は出す(文字と余白を詰めて収める) */
 @media (max-width: 560px) {
   .stage-card figcaption {
-    display: none;
+    font-size: 9px;
+    padding: 0.15em 0.5em;
+    border-width: 1.5px;
   }
 }
 

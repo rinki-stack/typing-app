@@ -15,10 +15,10 @@
 const LAYOUT = {
   titleTop: 81, // タイトルの縦位置 (%)
   girls: {
-    sc1: { left: 30, top: 22, size: 25, z: 3, tag: 59 }, // かおり
-    sc2: { left: 14, top: 10, size: 25, z: 1, tag: 68 }, // ちい
-    sc3: { left: 50, top: 0,  size: 26, z: 2, tag: 62 }, // みい
-    sc4: { left: 86, top: 10, size: 25, z: 1, tag: 64 }, // れい
-    sc5: { left: 70, top: 22, size: 25, z: 3, tag: 59 }, // れぇ
+    sc1: { left: 30, top: 22, size: 25, z: 3, tag: 65 }, // かおり
+    sc2: { left: 14, top: 10, size: 25, z: 1, tag: 72 }, // ちい
+    sc3: { left: 50, top: 0,  size: 26, z: 2, tag: 68 }, // みい
+    sc4: { left: 86, top: 10, size: 25, z: 1, tag: 70 }, // れい
+    sc5: { left: 70, top: 17, size: 25, z: 3, tag: 64 }, // れぇ
   },
 };
