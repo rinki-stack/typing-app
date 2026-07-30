@@ -527,6 +527,26 @@ function rankOf(kpm, acc) {
  * キーイベント
  * ================================================================ */
 /* ================================================================
+ * バナーのレイアウトを layout.js の設定から反映
+ * ================================================================ */
+function applyLayout(cfg) {
+  const L = cfg || (typeof LAYOUT !== "undefined" ? LAYOUT : null);
+  if (!L) return;
+  Object.entries(L.girls).forEach(([key, g]) => {
+    const el = document.querySelector("." + key);
+    if (!el) return;
+    el.style.left = g.left + "%";
+    el.style.top = g.top + "%";
+    el.style.width = `max(118px, calc(${g.size} * var(--u)))`;
+    el.style.zIndex = g.z;
+    el.style.setProperty("--tag", g.tag + "%");
+  });
+  const text = document.querySelector(".stage-text");
+  if (text) text.style.top = L.titleTop + "%";
+}
+applyLayout();
+
+/* ================================================================
  * 画面下のキーボード表示
  * ================================================================ */
 const KEY_ROWS = [
