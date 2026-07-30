@@ -177,17 +177,17 @@ body {
 /* top は「頭の位置」。全員この基準で揃うので顔の高さがそろう */
 .stage-card { transform: translateX(-50%); }
 
-.sc3 { left: 50%; top: 0%;  z-index: 2; width: max(126px, calc(26 * var(--u))); }
-.sc2 { left: 14%; top: 10%; z-index: 1; }
-.sc4 { left: 86%; top: 10%; z-index: 1; }
-.sc1 { left: 30%; top: 26%; z-index: 3; }
-.sc5 { left: 70%; top: 26%; z-index: 3; }
+.sc3 { left: 50%; top: 0%;  z-index: 2; width: max(126px, calc(26 * var(--u))); --tag: 40%; }
+.sc2 { left: 14%; top: 10%; z-index: 1; --tag: 50%; }
+.sc4 { left: 86%; top: 10%; z-index: 1; --tag: 44%; }
+.sc1 { left: 30%; top: 26%; z-index: 3; --tag: 44%; }
+.sc5 { left: 70%; top: 26%; z-index: 3; --tag: 44%; }
 
-/* 名前タグ: 全員 顔のすぐ下に統一 */
+/* 名前タグ: 顔に被らない高さ(あご下)に置く。子ごとに微調整 */
 .stage-card figcaption {
   position: absolute;
   left: 50%;
-  top: 33%;
+  top: var(--tag, 46%);
   transform: translateX(-50%);
   z-index: 2;
   width: fit-content;
