@@ -13,12 +13,12 @@
  *   tag  … 名前タグの高さ (大きいほど下がる)
  * ================================================================ */
 const LAYOUT = {
-  titleTop: 76, // タイトルの縦位置 (%)
+  titleTop: 81, // タイトルの縦位置 (%)
   girls: {
-    sc1: { left: 30, top: 26, size: 25, z: 3, tag: 44 }, // かおり
-    sc2: { left: 14, top: 10, size: 25, z: 1, tag: 50 }, // ちい
-    sc3: { left: 50, top: 0,  size: 26, z: 2, tag: 40 }, // みい
-    sc4: { left: 86, top: 10, size: 25, z: 1, tag: 44 }, // れい
-    sc5: { left: 70, top: 26, size: 25, z: 3, tag: 44 }, // れぇ
+    sc1: { left: 30, top: 22, size: 25, z: 3, tag: 59 }, // かおり
+    sc2: { left: 14, top: 10, size: 25, z: 1, tag: 68 }, // ちい
+    sc3: { left: 50, top: 0,  size: 26, z: 2, tag: 62 }, // みい
+    sc4: { left: 86, top: 10, size: 25, z: 1, tag: 64 }, // れい
+    sc5: { left: 70, top: 22, size: 25, z: 3, tag: 59 }, // れぇ
   },
 };
